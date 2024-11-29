@@ -1,0 +1,94 @@
+/* Colores personalizados */
+:root {
+  --golden-color: #d4af37; /* Dorado */
+  --gray-color: #4d4d4d; /* Gris oscuro */
+  --light-gray-color: #f4f4f4; /* Gris claro */
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+}
+
+/* Estilo general del contenido */
+.content {
+  background-color: var(--light-gray-color);
+}
+
+/* Header personalizado */
+.header {
+  --background: #4d4d4d;
+  --color: #d4af37;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--golden-color);
+  text-align: center;
+}
+
+/* Tarjetas personalizadas */
+ion-card {
+  margin: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tarjeta del clima */
+.weather-card {
+  background-color: var(--golden-color);
+  color: black;
+}
+
+.weather-card ion-card-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Tarjeta de recordatorios */
+.reminders-card {
+  background-color: #fff;
+  border: 1px solid var(--golden-color);
+}
+
+.reminder-item {
+  margin: 10px 0;
+  border: 1px solid var(--gray-color);
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.reminder-text h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--gray-color);
+}
+
+.breadcrumb ion-button {
+  margin: 5px;
+}
+
+/* Barra de progreso */
+.progress-bar {
+  margin: 10px 0;
+  height: 12px;
+  border-radius: 8px;
+}
+
+/* Botones */
+ion-button {
+  --border-radius: 8px;
+  margin: 5px;
+}
+
+ion-button[color="success"] {
+  --background: var(--success-color);
+}
+
+ion-button[color="warning"] {
+  --background: var(--warning-color);
+}
+
+ion-button[color="danger"] {
+  --background: var(--danger-color);
+}

@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="header">
+    <ion-title class="title">Bienvenido de Nuevo <br> a MOMENTUM </ion-title>
+    <p class="subtitle">Inicia sesión con tu cuenta!</p>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="ion-padding">
+      <!-- Campo de correo electrónico -->
+      <ion-item>
+        <ion-input formControlName="email" placeholder="Usuario" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-item>
+      <div *ngIf="loginForm?.controls?.['email']?.touched && loginForm?.controls?.['email']?.invalid">
+        <ion-text style="color: red;" *ngIf="errorControl?.['email']?.errors?.['required']">El campo es requerido</ion-text>
+        <ion-text style="color: red;" *ngIf="errorControl?.['email']?.errors?.['pattern']">El correo electrónico debe de ser válido</ion-text>
+      </div>
+
+      <!-- Campo de contraseña -->
+      <ion-item>
+        <ion-input formControlName="password" type="password" placeholder="Contraseña" class="input"></ion-input>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-item>
+      <div *ngIf="loginForm?.controls?.['password']?.touched && loginForm?.controls?.['password']?.invalid">
+        <ion-text style="color: red;" *ngIf="errorControl?.['password']?.errors?.['required']">El campo es requerido</ion-text>
+        <ion-text style="color: red;" *ngIf="errorControl?.['password']?.errors?.['pattern']">La contraseña debe tener al menos: una letra mayúscula, un número y contener al menos 8 caracteres</ion-text>
+      </div>
+
+      <!-- Enlaces adicionales -->
+      <div class="reset-password">
+        <a [routerLink]="['/reset-password']" style="color: #FFC33F;">Restablecer Contraseña</a>
+      </div>
+      <div class="signupLink">
+        <p>Nuevo Usuario? <a [routerLink]="['/sign-up']" style="color: #FFC33F;">¡Regístrate!</a></p> 
+      </div>
+    </div>
+
+    <!-- Botón de envío -->
+    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
+      <ion-button type="submit">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-button>
+    </ion-fab>
+  </form>
+</ion-content>

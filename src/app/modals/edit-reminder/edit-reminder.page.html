@@ -1,0 +1,62 @@
+<ion-header class="header">
+  <ion-toolbar color="golden">
+    <ion-title class="page-title">Editar Recordatorio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="closeModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <ion-card class="form-card">
+    <ion-card-header>
+      <ion-card-title class="form-title">Detalles del Recordatorio</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (submit)="updateReminder($event)">
+        <ion-item class="form-item">
+          <ion-label color="black">Título</ion-label>
+          <ion-input
+            [(ngModel)]="reminder.title"
+            name="title"
+            required
+            color="dark"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="form-item">
+          <ion-label color="black">Texto</ion-label>
+          <ion-input
+            [(ngModel)]="reminder.text"
+            name="text"
+            required
+            color="dark"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="form-item">
+          <ion-label color="primary">Fecha y Hora</ion-label>
+          <ion-datetime
+            [(ngModel)]="reminder.time"
+            name="time"
+            required
+            color="dark"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item class="form-item">
+          <ion-label color="primary">Repetir</ion-label>
+          <ion-select
+            [(ngModel)]="reminder.repeat"
+            name="repeat"
+            required
+            color="dark"
+          >
+            <ion-select-option value="Diario">Diario</ion-select-option>
+            <ion-select-option value="Semanal">Semanal</ion-select-option>
+            <ion-select-option value="Mensual">Mensual</ion-select-option>
+            <ion-select-option value="Anual">Anual</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" type="submit" color="golden">Actualizar Recordatorio</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

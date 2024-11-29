@@ -1,0 +1,106 @@
+<ion-header class="header">
+  <ion-toolbar color="golden">
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()" color="dark">
+        <strong>
+          <ion-icon name="exit" aria-hidden="true"></ion-icon>
+          LogOut
+        </strong>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="app-title">MOMENTUM</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddReminderModal()" color="dark">
+        <strong>
+          <ion-icon name="add" aria-hidden="true"></ion-icon>
+          Nuevo
+        </strong>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <!-- Sección de clima actual -->
+  <ion-card class="weather-card" *ngIf="weatherData">
+    <ion-card-header>
+      <ion-card-title>Clima Actual</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        <strong>{{ weatherData.name }}</strong> - 
+        {{ weatherData.main.temp | number:'1.0-0' }} °C -
+        {{ weatherData.weather[0].description | uppercase }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="reminders-card">
+    <ion-card-header>
+      <ion-card-title>Recordatorios</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-progress-bar
+        value="{{ progress }}"
+        color="success"
+        class="progress-bar"
+      ></ion-progress-bar>
+
+      <ion-list>
+        <ion-item
+          *ngFor="let reminder of reminders"
+          lines="none"
+          class="reminder-item"
+        >
+          <ion-label class="reminder-text">
+            <h2>{{ reminder.message }}</h2>
+            <p>{{ reminder.dateTime | date:'short' }}</p>
+            <p>{{ reminder.repeat }}</p>
+          </ion-label>
+
+          <div class="button-group">
+            <ion-button
+              color="success"
+              size="small"
+              [disabled]="isCompleted(reminder.id)"
+              (click)="markAsCompleted(reminder.id)"
+            >
+              Completar
+            </ion-button>
+            <ion-button
+              color="warning"
+              size="small"
+              (click)="toggleBreadcrumb(reminder.id)"
+            >
+              Opciones
+            </ion-button>
+            <div
+              *ngIf="showBreadcrumb === reminder.id"
+              class="breadcrumb"
+            >
+              <ion-button size="small" (click)="editReminder(reminder.id)">
+                Editar
+              </ion-button>
+              <ion-button
+                color="danger"
+                size="small"
+                (click)="deleteReminder(reminder.id)"
+              >
+                Eliminar
+              </ion-button>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="health-card">
+    <ion-card-header>
+      <ion-card-title>Recomendaciones de Salud</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ healthRecommendations }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

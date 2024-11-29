@@ -1,0 +1,68 @@
+/* Colores personalizados */
+:root {
+    --golden-color: #d4af37; /* Dorado */
+    --gray-color: #4d4d4d; /* Gris oscuro */
+    --light-gray-color: #f4f4f4; /* Gris claro */
+    --primary-color: var(--golden-color);
+  }
+  
+  /* Header personalizado */
+  .header {
+    --background: var(--gray-color);
+    --color: var(--golden-color);
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--golden-color);
+  }
+  
+  /* Contenido */
+  .content {
+    background-color: var(--light-gray-color);
+    padding: 16px;
+  }
+  
+  /* Tarjeta del formulario */
+  .form-card {
+    margin: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--gray-color);
+  }
+  
+  /* Ítems del formulario */
+  .form-item {
+    margin-bottom: 12px;
+  }
+  
+  ion-input,
+  ion-datetime,
+  ion-select {
+    --background: white;
+    --color: black;
+    --placeholder-color: black;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+  }
+  
+  /* Botón principal */
+  ion-button {
+    --background: gold;
+    --color: black;
+    --border-radius: 8px;
+  }
+  
+  ion-button:hover {
+    opacity: 0.9;
+  }
+  

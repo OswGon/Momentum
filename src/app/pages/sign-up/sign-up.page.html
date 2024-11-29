@@ -1,0 +1,84 @@
+<ion-content>
+  <div class="header">
+    <ion-title class="title">¡Bienvenido!</ion-title>
+    <p class="subtitle">Regístrate para crear tu cuenta!</p>
+  </div>
+
+  <form [formGroup]="regForm" (ngSubmit)="signUp()">
+    <div class="ion-padding">
+      <ion-item>
+        <ion-input formControlName="fullname" placeholder="Nombre" class="input"></ion-input>
+        <ion-icon name="person-outline" slot="end"></ion-icon>
+      </ion-item>
+      <div *ngIf="regForm?.controls?.['fullname']?.touched && regForm?.controls?.['fullname']?.invalid">
+        <ion-text style="color: red;" *ngIf="errorControl?.['fullname']?.errors?.['required']">
+          <strong>El campo es requerido</strong>
+        </ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input formControlName="email" placeholder="Correo" class="input"></ion-input>
+        <ion-icon name="mail-outline" slot="end"></ion-icon>
+      </ion-item>
+      <div *ngIf="regForm?.controls?.['email']?.touched && regForm?.controls?.['email']?.invalid">
+        <ion-text style="color: red;" *ngIf="errorControl?.['email']?.errors?.['required']">
+          <strong>El campo es requerido</strong>
+        </ion-text>
+        <ion-text style="color: red;" *ngIf="errorControl?.['email']?.errors?.['pattern']">
+          <strong>El correo electrónico debe ser válido</strong>
+        </ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input formControlName="password" placeholder="Contraseña" type="password" class="input"></ion-input>
+        <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+      </ion-item>
+      <div *ngIf="regForm?.controls?.['password']?.touched && regForm?.controls?.['password']?.invalid">
+        <ion-text style="color: red;" *ngIf="errorControl?.['password']?.errors?.['required']">
+          <strong>El campo es requerido</strong>
+        </ion-text>
+        <ion-text style="color: red;" *ngIf="errorControl?.['password']?.errors?.['pattern']">
+          <strong>La contraseña debe tener al menos: una letra mayúscula, un número, un carácter especial y contener al menos 8 dígitos</strong>
+        </ion-text>
+      </div>
+
+      <ion-item lines="none">
+        <ion-checkbox formControlName="politicaPrivacidad" slot="start"></ion-checkbox>
+        <ion-label>
+          He leído y acepto la 
+          <a (click)="openPoliticaPrivacidad()" style="color: #FFC33F;">Política de Privacidad</a>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="regForm?.controls?.['politicaPrivacidad']?.touched">
+        <ion-text style="color: red;" *ngIf="errorControl?.['politicaPrivacidad']?.errors?.['required']">
+          <strong>El campo es requerido</strong>
+        </ion-text>
+      </div>
+
+      <ion-item lines="none">
+        <ion-checkbox formControlName="avisoPrivacidad" slot="start"></ion-checkbox>
+        <ion-label>
+          Acepto el 
+          <a (click)="openAvisoPrivacidad()" style="color: #FFC33F;">Aviso de Privacidad</a>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="regForm?.controls?.['avisoPrivacidad']?.touched">
+        <ion-text style="color: red;" *ngIf="errorControl?.['avisoPrivacidad']?.errors?.['required']">
+          <strong>El campo es requerido</strong>
+        </ion-text>
+      </div>
+
+      <div class="signinLink">
+        <p>¿Ya eres Usuario? 
+          <a [routerLink]="['/sign-in']" style="color: #FFC33F;">Inicia sesión!</a>
+        </p> 
+      </div>
+    </div>
+
+    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
+      <ion-button type="submit">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-button>
+    </ion-fab>
+  </form>
+</ion-content>
