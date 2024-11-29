@@ -87,14 +87,35 @@ export class HomePage implements OnInit {
   }
 
   async deleteReminder(id: string) {
-    try {
-      await this.reminderService.deleteReminder(id);
-      this.loadReminders();
-      await this.showToast('Recordatorio eliminado.', 'danger');
-    } catch (error) {
-      await this.showErrorAlert(error);
-    }
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Estás seguro de que deseas eliminar este recordatorio?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelado');
+          }
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            try {
+              await this.reminderService.deleteReminder(id);
+              this.loadReminders();
+              await this.showToast('Recordatorio eliminado.', 'danger');
+            } catch (error) {
+              await this.showErrorAlert(error);
+            }
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
   }
+  
 
   async updateProgress() {
     try {
