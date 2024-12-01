@@ -1,5 +1,12 @@
 {
   "appId": "io.ionic.starter",
   "appName": "npx cap add androidnpx cap add ios",
-  "webDir": "www"
+  "webDir": "www",
+  "bundledWebRuntime": false,
+   "plugins": { 
+    "FirebaseAnalytics":
+     { "dataCollectionEnabled": true, 
+     "collectionEnabled": true
+      } 
+    }
 }

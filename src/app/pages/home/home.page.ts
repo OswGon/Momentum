@@ -5,6 +5,7 @@ import { ReminderService } from '../../services/reminder.service';
 import { AddReminderPage } from '../../modals/add-reminder/add-reminder.page';
 import { EditReminderPage } from 'src/app/modals/edit-reminder/edit-reminder.page';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AnalyticsService } from 'src/app/services/analytics.service';  // Importa el servicio de Analytics
 
 @Component({
   selector: 'app-home',
@@ -26,7 +27,8 @@ export class HomePage implements OnInit {
     private http: HttpClient,
     private cdr: ChangeDetectorRef,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private analyticsService: AnalyticsService  // Añade el servicio de Analytics al constructor
   ) {}
 
   ngOnInit() {
@@ -34,6 +36,9 @@ export class HomePage implements OnInit {
     this.getWeatherData();
     this.requestNotificationPermission();
     this.startReminderCheck(); // Iniciar el proceso de verificación de recordatorios
+
+    // Inicializar Firebase Analytics y registrar el evento de vista de página
+    this.analyticsService.logEvent('page_view', { page: 'home' });
   }
 
   async openAddReminderModal() {
@@ -53,6 +58,8 @@ export class HomePage implements OnInit {
         console.log('Recordatorios cargados:', reminders);
         this.reminders = reminders;
         this.updateProgress();
+        // Registrar evento de carga de recordatorios
+        this.analyticsService.logEvent('load_reminders', { count: reminders.length });
       })
       .catch((error) => {
         console.error('Error al cargar recordatorios:', error);
@@ -66,6 +73,8 @@ export class HomePage implements OnInit {
       this.loadReminders();
       this.completedReminders.add(id);
       await this.showToast('Recordatorio marcado como completado.', 'success');
+      // Registrar evento de recordatorio completado
+      this.analyticsService.logEvent('mark_as_completed', { id });
     } catch (error) {
       await this.showErrorAlert('Este ya ha sido marcado como completado');
     }
@@ -105,6 +114,8 @@ export class HomePage implements OnInit {
               await this.reminderService.deleteReminder(id);
               this.loadReminders();
               await this.showToast('Recordatorio eliminado.', 'danger');
+              // Registrar evento de recordatorio eliminado
+              this.analyticsService.logEvent('delete_reminder', { id });
             } catch (error) {
               await this.showErrorAlert(error);
             }
@@ -115,7 +126,6 @@ export class HomePage implements OnInit {
   
     await alert.present();
   }
-  
 
   async updateProgress() {
     try {
@@ -191,6 +201,7 @@ export class HomePage implements OnInit {
       this.reminderService.checkAndNotifyReminders();
     }, 60000); // Revisión cada minuto
   }
+
   async logout() {
     try {
       await this.authenticationService.signOut();  // Llama al método signOut del servicio de autenticación
